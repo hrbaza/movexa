@@ -455,9 +455,11 @@ export default function MoviePage({
     seekBackCooldownRef.current = 0;
   }, [item.id, isWatched]);
 
-  // Show loader instantly when play starts
+  // Electron's webview needs an explicit loading state. In browsers the
+  // iframe can finish loading before this effect runs, so setting it here
+  // would hide an already-loaded player indefinitely.
   useEffect(() => {
-    if (playing) setWebviewLoading(true);
+    if (playing && isElectron) setWebviewLoading(true);
   }, [playing]);
 
   // ── Webview memory cleanup ────────────────────────────────────────────────
