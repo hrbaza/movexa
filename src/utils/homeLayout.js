@@ -11,7 +11,13 @@ export const HOME_ROWS = [
   { id: "topRated", label: "Top Rated" },
 ];
 
-const DEFAULT_ROW_ORDER = HOME_ROWS.map((r) => r.id);
+const DEFAULT_ROW_ORDER = [
+  "trendingMovies",
+  "trendingTV",
+  "topRated",
+  "recommended",
+  "continue",
+];
 const DEFAULT_ROW_VISIBLE = Object.fromEntries(
   HOME_ROWS.map((r) => [r.id, true]),
 );
@@ -20,6 +26,19 @@ export function loadHomeLayout() {
   const savedOrder = storage.get("homeRowOrder");
   const savedVisible = storage.get("homeRowVisible");
   const knownIds = new Set(HOME_ROWS.map((r) => r.id));
+
+  // One-time migration: make live content immediately visible on compact
+  // screens even when an older saved layout put recommendations first.
+  if (!storage.get("trendingFirstDefaultV1")) {
+    const visible = { ...DEFAULT_ROW_VISIBLE, ...(savedVisible || {}) };
+    visible.trendingMovies = true;
+    visible.trendingTV = true;
+    visible.topRated = true;
+    storage.set("homeRowOrder", DEFAULT_ROW_ORDER);
+    storage.set("homeRowVisible", visible);
+    storage.set("trendingFirstDefaultV1", true);
+    return { order: DEFAULT_ROW_ORDER, visible };
+  }
 
   const order = savedOrder
     ? [
