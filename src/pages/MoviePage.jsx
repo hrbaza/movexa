@@ -1001,7 +1001,6 @@ export default function MoviePage({
               src={getSourceUrl(playerSource, "movie", item.id, null, null, {}, playerAccentColor, playerSubLang)}
               allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
               allowFullScreen
-              sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"
               referrerPolicy="no-referrer"
               onLoad={() => setWebviewLoading(false)}
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none", visibility: webviewLoading ? "hidden" : "visible" }}

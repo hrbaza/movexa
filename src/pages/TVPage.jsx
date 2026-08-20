@@ -2024,7 +2024,6 @@ export default function TVPage({
                   src={getSourceUrl(playerSource, "tv", item.id, playerEp.season, playerEp.episode, {}, playerAccentColor, playerSubLang)}
                   allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
                   allowFullScreen
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"
                   referrerPolicy="no-referrer"
                   onLoad={() => setWebviewLoading(false)}
                   style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none", background: "black", visibility: webviewLoading ? "hidden" : "visible" }}
