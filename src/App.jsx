@@ -10,7 +10,7 @@ import {
 import ErrorBoundary from "./components/ErrorBoundary";
 import KeyboardShortcutsModal from "./components/KeyboardShortcutsModal";
 import WindowTitlebar from "./components/WindowTitlebar";
-import { storage, secureStorage, STORAGE_KEYS } from "./utils/storage";
+import { storage, secureStorage, STORAGE_KEYS, isElectron } from "./utils/storage";
 import {
   applyAccentColor,
   applyTheme,
@@ -320,6 +320,11 @@ export default function App() {
 
   // ── Load API key from secure storage on startup ──
   useEffect(() => {
+    if (!isElectron) {
+      setApiKey("server-managed");
+      setApiKeyLoaded(true);
+      return;
+    }
     let mounted = true;
     secureStorage.get("apikey").then((val) => {
       if (!mounted) return;
@@ -373,14 +378,9 @@ export default function App() {
     }
     setApiKeyStatus("checking");
     const controller = new AbortController();
-    fetch("https://api.themoviedb.org/3/configuration", {
-      headers: { Authorization: `Bearer ${apiKey}` },
-      signal: controller.signal,
-    })
+    tmdbFetch("/configuration", apiKey)
       .then((res) => {
-        if (res.status === 401 || res.status === 403)
-          setApiKeyStatus("invalid_token");
-        else setApiKeyStatus("ok");
+        if (res) setApiKeyStatus("ok");
       })
       .catch((err) => {
         if (err.name === "AbortError") return;

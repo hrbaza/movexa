@@ -79,7 +79,11 @@ export const tmdbFetch = async (path, apiKey) => {
 
   let res;
   try {
-    res = await fetch(`${TMDB_BASE}${localizedPath}`, {
+    const usesServerToken = apiKey === "server-managed";
+    const url = usesServerToken
+      ? `/api/tmdb?path=${encodeURIComponent(localizedPath)}`
+      : `${TMDB_BASE}${localizedPath}`;
+    res = await fetch(url, usesServerToken ? {} : {
       headers: { Authorization: `Bearer ${apiKey}` },
     });
   } catch {
