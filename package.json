@@ -1,7 +1,7 @@
 {
-  "name": "streambert",
+  "name": "movexa",
   "version": "2.6.0",
-  "description": "Streambert Desktop App",
+  "description": "Movexa Movies & TV Web App",
   "author": {
     "name": "truelockmc",
     "email": "anonyson@proton.me"
@@ -38,7 +38,7 @@
   },
   "build": {
     "appId": "com.truelockmc.streambert",
-    "productName": "Streambert",
+    "productName": "Movexa",
     "asar": true,
     "compression": "normal",
     "directories": {
@@ -93,7 +93,7 @@
       "createStartMenuShortcut": true,
       "selectPerMachineByDefault": false,
       "license": "LICENSE",
-      "uninstallDisplayName": "Uninstall Streambert",
+      "uninstallDisplayName": "Uninstall Movexa",
       "installerSidebar": "public/installer-sidebar.bmp"
     },
     "win": {
@@ -159,11 +159,11 @@
       "icon": "public/sized",
       "desktop": {
         "entry": {
-          "Name": "Streambert",
-          "Comment": "Streambert Desktop App",
+          "Name": "Movexa",
+          "Comment": "Movexa Movies & TV App",
           "Categories": "AudioVideo;Video;Player;Multimedia;Internet;",
           "Icon": "streambert",
-          "StartupWMClass": "Streambert"
+          "StartupWMClass": "Movexa"
         }
       }
     },

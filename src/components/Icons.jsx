@@ -1,7 +1,7 @@
-export const StreambertLogo = ({ style }) => (
+export const MovexaLogo = ({ style }) => (
   <img
-    src="./logo.svg"
-    alt="Streambert"
+    src="/movexa-logo.png"
+    alt="Movexa"
     width="44"
     height="44"
     style={{ width: "100%", height: "100%", display: "block", ...style }}

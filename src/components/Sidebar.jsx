@@ -3,7 +3,7 @@ import { imgUrl } from "../utils/api";
 import { isElectron } from "../utils/storage";
 import { useSeasonalEvent } from "../components/seasonalEvents.jsx";
 import {
-  StreambertLogo,
+  MovexaLogo,
   HomeIcon,
   SearchIcon,
   HistoryIcon,
@@ -106,10 +106,10 @@ export default function Sidebar({
       <div
         className="sidebar-logo"
         onClick={() => onNavigate("home")}
-        title="Streambert"
+        title="Movexa"
         style={{ position: "relative" }}
       >
-        <StreambertLogo />
+        <MovexaLogo />
         {seasonalEvent && seasonalEvent.render()}
       </div>
 

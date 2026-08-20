@@ -6,12 +6,12 @@
 [![GitHub](https://img.shields.io/badge/GitHub-truelockmc%2Fstreambert-181717?style=for-the-badge&logo=github)](https://github.com/truelockmc/streambert)
 [![Codeberg](https://img.shields.io/badge/Codeberg-truelockmc%2Fstreambert-2185D0?style=for-the-badge&logo=codeberg)](https://codeberg.org/truelockmc/streambert)
 [![AUR Version](https://img.shields.io/aur/version/streambert-bin?style=for-the-badge&logo=archlinux)](https://aur.archlinux.org/packages/streambert-bin)
-# Streambert
+# Movexa
 A cross-platform Electron Desktop App to stream and download any Movie, TV Series or Anime in the World. Zero Ads and Tracking <br></br>
 ![Logo](public/logo.svg)
 [Installation](https://github.com/truelockmc/streambert?tab=readme-ov-file#requirements)
 
-## Why Streambert?
+## Why Movexa?
 - 🎦 **Streaming:** Stream any Movie, Anime or TV Series from around the World.
 - 📥 **Downloading:** Download anything you want to watch.
 - 📃 **Subtitles:** Download and manage Subtitles.
@@ -141,7 +141,7 @@ Before contributing please make sure to read the [Contributing Guidelines](CONTR
 
 **IMPORTANT: This application is for educational and personal use only.**
 
-- Streambert does not host, store, or distribute any copyrighted content
+- Movexa does not host, store, or distribute any copyrighted content
 - All content is sourced from third-party providers and websites
 - Users are solely responsible for ensuring they have legal rights to access any content
 - The developer does not endorse or encourage copyright infringement
