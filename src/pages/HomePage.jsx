@@ -196,9 +196,9 @@ export default function HomePage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apiKey, offline]);
 
-  // Stable pre-built item arrays for carousels, capped at 10
+  // Stable pre-built arrays. Movies include up to 60 live trending/new releases.
   const trendingMovieItems = useMemo(
-    () => trending.slice(0, 10).map((i) => ({ ...i, media_type: "movie" })),
+    () => trending.slice(0, 60).map((i) => ({ ...i, media_type: "movie" })),
     [trending],
   );
   const trendingTVItems = useMemo(

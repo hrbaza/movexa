@@ -490,7 +490,7 @@ export default function App() {
   // current setting the cache is treated as stale and data is re-fetched.
   const fetchTrending = useCallback(() => {
     if (!apiKey) return;
-    const cached = storage.get("trendingCache");
+    const cached = storage.get("trendingCacheV2");
     const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
     const currentLang = storage.get(STORAGE_KEYS.TMDB_LANG) || "en-US";
     if (
@@ -505,15 +505,32 @@ export default function App() {
     }
     setLoadingHome(true);
     Promise.all([
-      tmdbFetch("/trending/movie/week", apiKey),
+      tmdbFetch("/trending/movie/week?page=1", apiKey),
+      tmdbFetch("/trending/movie/week?page=2", apiKey),
+      tmdbFetch("/movie/now_playing?page=1", apiKey),
+      tmdbFetch("/movie/now_playing?page=2", apiKey),
+      tmdbFetch("/movie/now_playing?page=3", apiKey),
       tmdbFetch("/trending/tv/week", apiKey),
     ])
-      .then(([m, t]) => {
-        const movies = m.results || [];
+      .then(([trending1, trending2, new1, new2, new3, t]) => {
+        const seen = new Set();
+        const movies = [
+          ...(trending1.results || []),
+          ...(trending2.results || []),
+          ...(new1.results || []),
+          ...(new2.results || []),
+          ...(new3.results || []),
+        ]
+          .filter((movie) => {
+            if (!movie?.id || seen.has(movie.id)) return false;
+            seen.add(movie.id);
+            return true;
+          })
+          .slice(0, 60);
         const tv = t.results || [];
         setTrending(movies);
         setTrendingTV(tv);
-        storage.set("trendingCache", {
+        storage.set("trendingCacheV2", {
           movies,
           tv,
           ts: Date.now(),

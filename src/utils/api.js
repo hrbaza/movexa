@@ -43,6 +43,7 @@ export function clearTmdbCache() {
   _tmdbCache.clear();
   try {
     localStorage.removeItem("streambert_trendingCache");
+    localStorage.removeItem("streambert_trendingCacheV2");
   } catch {}
 }
 
