@@ -155,11 +155,18 @@ export function formatBytes(bytes) {
 const _isElectronSecure =
   typeof window !== "undefined" && !!window.electron?.secureGet;
 
+// Shared Wyzie key supplied for Movexa. A user-saved key still takes priority.
+const DEFAULT_WYZIE_API_KEY =
+  "wyzie-f01b1hrhocu9b3ls3elokrf0tbgbtl01";
+
 export const secureStorage = {
   /** Read an encrypted value. Returns null if not set. */
   async get(key) {
-    if (!_isElectronSecure) return storage.get(`secure_${key}`);
-    return window.electron.secureGet(key);
+    const saved = !_isElectronSecure
+      ? storage.get(`secure_${key}`)
+      : await window.electron.secureGet(key);
+    if (saved) return saved;
+    return key === STORAGE_KEYS.WYZIE_API_KEY ? DEFAULT_WYZIE_API_KEY : null;
   },
 
   /** Write an encrypted value. Pass null/empty to delete. */
