@@ -40,9 +40,16 @@ export function saveHomeLayout(order, visible) {
   storage.set("homeRowVisible", visible);
 }
 
-/** "carousel" (default) | "list" */
+/** "carousel" | "list" (default) */
 export function loadHomeViewMode() {
-  return storage.get("homeViewMode") || "carousel";
+  // One-time migration makes Grid Sections the default for existing visitors
+  // while preserving any choice they make afterwards in Settings.
+  if (!storage.get("gridSectionsDefaultV1")) {
+    storage.set("homeViewMode", "list");
+    storage.set("gridSectionsDefaultV1", true);
+    return "list";
+  }
+  return storage.get("homeViewMode") || "list";
 }
 
 export function saveHomeViewMode(mode) {
